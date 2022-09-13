@@ -11,9 +11,8 @@
 	import hold from "$lib/hold";
 
 	var roland: Robot;
-
-	async function initialize(address: string) {
-		const promise = Robot.connect(address);
+	async function initialize() {
+		const promise = Robot.connect("ws://192.168.1.108:1111/ws");
 		roland = await promise;
 		init = true;
 		return promise;
@@ -74,7 +73,7 @@
 	}}
 />
 
-{#await initialize("ws://192.168.1.108:1111/ws")}
+{#await initialize()}
 	<div
 		class="animate-none btn btn-ghost btn-lg loading before:h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
 	>
@@ -187,7 +186,7 @@
 		</div>
 		<button
 			class="btn btn-primary flex items-center justify-around gap-1"
-			on:click={() => window.location.reload()}><Fa icon={faArrowRotateLeft} />Retry</button
+			on:click={() => location.reload()}><Fa icon={faArrowRotateLeft} />Retry</button
 		>
 	</div>
 {/await}
